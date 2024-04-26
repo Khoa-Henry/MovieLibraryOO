@@ -6,5 +6,6 @@ namespace MovieLibraryEntities.Dao
     {
         IEnumerable<Movie> GetAll();
         IEnumerable<Movie> Search(string searchString);
+        IEnumerable<Movie> AddMovie(string addString, DateTime date);
     }
 }

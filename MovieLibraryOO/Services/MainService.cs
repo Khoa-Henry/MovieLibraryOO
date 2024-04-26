@@ -40,13 +40,19 @@ namespace MovieLibraryOO.Services
                         var movies = _movieMapper.Map(allMovies);
                         ConsoleTable.From<MovieDto>(movies).Write();
                         break;
-                    case Menu.MenuOptions.ListFromFile:
-                        _fileService.Read();
-                        _fileService.Display();
-                        break;
                     case Menu.MenuOptions.Add:
                         _logger.LogInformation("Adding a new movie");
-                        menu.GetUserInput();
+                        // ask for movie name and date or use today's date???
+                        var name = menu.GetUserResponse("Enter your", "movie title:", "green");
+                        var year = menu.GetUserResponse("Enter the", "year of the movie:", "green");
+                        var month = menu.GetUserResponse("Enter the", "month of the movie", "green");
+                        var day = menu.GetUserResponse("Enter the", "day of the movie:", "green");
+
+                        var fullDate = DateTime.Parse($"{month} {day}, {year}");
+                        // call repository
+                        var addedMovie = _repository.AddMovie(name, fullDate);
+                        movies = _movieMapper.Map(addedMovie);
+                        ConsoleTable.From<MovieDto>(movies).Write();
                         break;
                     case Menu.MenuOptions.Update:
                         _logger.LogInformation("Updating an existing movie");

@@ -37,5 +37,15 @@ namespace MovieLibraryEntities.Dao
 
             return temp;
         }
+
+        public IEnumerable<Movie> AddMovie(string addString, DateTime date)
+        {
+            var newMovie = new Movie();
+            newMovie.Title = addString;
+            newMovie.ReleaseDate = date;
+            _context.Movies.Add(newMovie);
+            _context.SaveChanges();
+            return Search(addString);
+        }
     }
 }
