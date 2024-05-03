@@ -9,6 +9,7 @@
         public string City { get; set; }
         public string State { get; set; }
 
+        // give whole list
         public virtual int UserId { get; set; }
     }
 }

@@ -67,6 +67,7 @@ namespace MovieLibraryEntities.Dao
 
         public User AddUser(string fName, string lName, int age, string gender, string street, string city, string state, string zCode, string occupationName)
         {
+            //instead of new user, use new userDetail
             var newUser = new User
             {
                 Age = age,
