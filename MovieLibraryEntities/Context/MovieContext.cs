@@ -31,7 +31,7 @@ public class MovieContext : DbContext
             .Build();
 
         optionsBuilder
-            .LogTo(action => _logger.LogInformation(action), LogLevel.Information)
+            //.LogTo(action => _logger.LogInformation(action), LogLevel.Information)
             //.EnableSensitiveDataLogging()
             .UseSqlServer(configuration.GetConnectionString("MovieContext"), builder => builder.EnableRetryOnFailure()
             );

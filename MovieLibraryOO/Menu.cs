@@ -11,10 +11,9 @@ namespace MovieLibraryOO
         public enum MenuOptions
         {
             ListFromDb,
-            Add,
-            Update,
-            Delete,
-            Search,
+            AddMovie,
+            SearchMovie,
+            AddUser,
             Exit
         }
 

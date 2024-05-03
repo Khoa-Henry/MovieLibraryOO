@@ -5,7 +5,8 @@ namespace MovieLibraryEntities.Dao
     public interface IRepository
     {
         IEnumerable<Movie> GetAll();
-        IEnumerable<Movie> Search(string searchString);
-        IEnumerable<Movie> AddMovie(string addString, DateTime date);
+        Movie Search(string searchString);
+        Movie AddMovie(string addString, DateTime date, string[] inputedGenres);
+        User AddUser(string fName, string lName, int age, string gender, string street, string city, string state, string zCode, string occupationName);
     }
 }
