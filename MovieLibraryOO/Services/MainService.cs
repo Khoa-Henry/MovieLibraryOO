@@ -87,7 +87,8 @@ namespace MovieLibraryOO.Services
                         var zCode = menu.GetUserResponse("Enter user", "zipcode:", "green");
                         var occupationName = menu.GetUserResponse("Enter user", "occupation:", "green");
 
-                        _repository.AddUser(firstName,lastName, ageInt, gender.ToUpper(),street,city,state.ToUpper(),zCode, occupationName);
+                        var result = _repository.AddUser(firstName,lastName, ageInt, gender.ToUpper(),street,city,state.ToUpper(),zCode, occupationName);
+                        
                         _logger.LogInformation("New user added!!!");
                         break;
                 }

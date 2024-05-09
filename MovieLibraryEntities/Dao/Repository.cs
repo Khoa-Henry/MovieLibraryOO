@@ -65,23 +65,23 @@ namespace MovieLibraryEntities.Dao
             return Search(addString);
         }
 
-        public User AddUser(string fName, string lName, int age, string gender, string street, string city, string state, string zCode, string occupationName)
+        public UserDetail AddUser(string fName, string lName, int age, string gender, string street, string city, string state, string zCode, string occupationName)
         {
-            //instead of new user, use new userDetail
-            var newUser = new User
+            var newUser = new UserDetail
             {
-                Age = age,
-                Gender = gender,
-                ZipCode = zCode,
-                UserDetail = new UserDetail
+                FirstName = fName,
+                LastName = lName,
+                StreetAddress = street,
+                City = city,
+                State = state,
+                User = new User
                 {
-                    FirstName = fName,
-                    LastName = lName,
-                    StreetAddress = street,
-                    City = city,
-                    State = state
+                    Age = age,
+                    Gender = gender,
+                    ZipCode = zCode,
                 }
             };
+
 
             // Lookup or create occupation
             var occupation = _context.Occupations.FirstOrDefault(o => o.Name.ToLower() == occupationName.Trim().ToLower());
@@ -90,13 +90,10 @@ namespace MovieLibraryEntities.Dao
                 occupation = new Occupation { Name = occupationName };
                 _context.Occupations.Add(occupation);
             }
-            newUser.Occupation = occupation;
+            newUser.User.Occupation = occupation;
 
             // Add user to database
-            _context.Users.Add(newUser);
-            Console.WriteLine(newUser.Id);
-            Console.WriteLine(newUser.Occupation.Name);
-            Console.WriteLine(newUser.UserDetail.FirstName);
+            _context.UserDetails.Add(newUser);
             _context.SaveChanges();
             return newUser;
         }

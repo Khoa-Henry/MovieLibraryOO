@@ -1,4 +1,6 @@
-﻿namespace MovieLibraryEntities.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace MovieLibraryEntities.Models
 {
     public class UserDetail
     {
@@ -9,7 +11,6 @@
         public string City { get; set; }
         public string State { get; set; }
 
-        // give whole list
-        public virtual int UserId { get; set; }
+        public virtual User? User { get; set; }
     }
 }
