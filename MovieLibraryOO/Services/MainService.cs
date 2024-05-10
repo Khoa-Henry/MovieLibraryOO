@@ -7,6 +7,8 @@ using MovieLibraryOO.Mappers;
 using MovieLibraryEntities.Models;
 using System;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection;
 
 namespace MovieLibraryOO.Services
 {
@@ -88,8 +90,8 @@ namespace MovieLibraryOO.Services
                         var occupationName = menu.GetUserResponse("Enter user", "occupation:", "green");
 
                         var result = _repository.AddUser(firstName,lastName, ageInt, gender.ToUpper(),street,city,state.ToUpper(),zCode, occupationName);
-                        
                         _logger.LogInformation("New user added!!!");
+                        PrintUserDetail(result);
                         break;
                 }
             }
@@ -126,6 +128,23 @@ namespace MovieLibraryOO.Services
             // Display the bottom border
             Console.WriteLine("|" + new string('-', 6) + "+" + new string('-', 32) + "+" + new string('-', 24) + "+" + new string('-', 32) + "|");
 
+        }
+
+        public void PrintUserDetail(UserDetail user)
+        {
+            string fullAddress = $"{user.StreetAddress}, {user.City}, {user.State} {user.User.ZipCode}";
+            string fullName = $"{user.FirstName} {user.LastName}";
+
+            // Display the header
+            Console.WriteLine("|" + new string('-', 6) + "+" + new string('-', 32) + "+" + new string('-', 10) + "+" + new string('-', 12) + "+" + new string('-', 20) + "+" + new string('-', 44) + "|");
+            Console.WriteLine($"| {"Id",4} | {"Name",-30} | {"Age",8} | {"Gender",-10} | {"Occupation",-18} | {"Address",-42} |");
+            Console.WriteLine("|" + new string('-', 6) + "+" + new string('-', 32) + "+" + new string('-', 10) + "+" + new string('-', 12) + "+" + new string('-', 20) + "+" + new string('-', 44) + "|");
+
+            // Display the user data
+            Console.WriteLine($"| {user.Id,4} | {fullName,-30} | {user.User.Age,8} | {user.User.Gender,-10} | {user.User.Occupation.Name,-18} | {fullAddress,-42} |");
+
+            // Display the bottom border
+            Console.WriteLine("|" + new string('-', 6) + "+" + new string('-', 32) + "+" + new string('-', 10) + "+" + new string('-', 12) + "+" + new string('-', 20) + "+" + new string('-', 44) + "|");
         }
     }
 }
